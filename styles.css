@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+header{
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-size: 2em;
+    margin-top:5%;
+    margin-bottom: 1em;
+    width: 70%;
+}
+table{
+    border-collapse: collapse; 
+    margin: auto;
+    width: 70%;
+    text-align: center;
+    font-size: 1.3em;
+    border: lightgrey 2px solid;
+}
+
+th{
+    background-color: black;
+    color:white;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+td{
+    padding: 0.5em 1em 0.5em 1em;
+}
+tbody:nth-child(odd){
+    background-color: rgba(211, 211, 211, 0.597);
+}
+
+
+/*File input*/
+
+.flex{
+    display: flex;
+    justify-content: center;
+    margin-top:2em;
+}
+input[type=file]::file-selector-button {
+    border: none;
+    background: #000000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+  
+input[type=file]::file-selector-button:hover {
+    background: #0000009e;
+}
+
+@media all and (max-width: 600px) {
+    header{
+        font-size: 1em;
+        width: 90%
+    }
+    table{
+        font-size: 1em;
+        width: 90%;
+        table-layout: fixed;
+    }
+}
