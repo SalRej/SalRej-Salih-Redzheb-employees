@@ -10,16 +10,21 @@ function handleFiles() {
    const fileText = fileReader.result;
    const fileRows = fileText.split(/\r\n|\n|\r/);
 
+   const rowsData = [];
+   for(let i = 0; i < fileRows.length; i++){
+    const currentRow = fileRows[i].split(',');
+    const endDate = isNaN(Date.parse(currentRow[3]))===true?new Date(): new Date(currentRow[3]);
+    rowsData.push([Number(currentRow[0]),Number(currentRow[1]),new Date(currentRow[2]),endDate]);
+   }
+
    const map = new Map();
 
-   for(let i = 0; i < fileRows.length; i++){
+   for(let i = 0; i < rowsData.length; i++){
 
-        const currentRow = fileRows[i].split(',');
-
-        const currentEmployeeId = Number(currentRow[0]);
-        const currentProjectId = Number(currentRow[1]);
-        const currentStartDate = new Date(currentRow[2]);
-        const currentEndDate = isNaN(Date.parse(currentRow[3]))===true?new Date(): new Date(currentRow[3]);
+        const currentEmployeeId = rowsData[i][0];
+        const currentProjectId = rowsData[i][1];
+        const currentStartDate = rowsData[i][2]
+        const currentEndDate = rowsData[i][3];
 
         for(let j = 0; j < fileRows.length; j++){
 
@@ -28,11 +33,10 @@ function handleFiles() {
                 continue;
             }
             
-            const rowToCheck = fileRows[j].split(',');
-            const employeeIdToCheck = Number(rowToCheck[0]);
-            const projectIdToCheck = Number(rowToCheck[1]);
-            const startDateToCheck = new Date(rowToCheck[2]);
-            const endDateToCheck = isNaN(Date.parse(rowToCheck[3]))===true?new Date(): new Date(rowToCheck[3]);
+            const employeeIdToCheck = rowsData[j][0];
+            const projectIdToCheck = rowsData[j][1];
+            const startDateToCheck = rowsData[j][2];
+            const endDateToCheck = rowsData[j][3];
 
             //if looking at the same employee
             if(currentEmployeeId === employeeIdToCheck){
